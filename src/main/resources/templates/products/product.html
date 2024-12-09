@@ -15,7 +15,7 @@
         .card:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); }
         .card-title { font-size: 1.25rem; font-weight: bold; color: #343a40; }
         .card-text { color: #6c757d; }
-        .card-img-top { height: 200px; object-fit: cover; } /* Đảm bảo hình ảnh có kích thước đồng nhất */
+        .card-img-top { height: 200px; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -30,6 +30,18 @@
                 <li class="nav-item"><a class="nav-link" href="/products/index">Trang Chủ</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Sản Phẩm</a></li>
                 <li class="nav-item"><a class="nav-link" href="/products/cart"><i class="bi bi-cart-fill"></i> Giỏ Hàng</a></li>
+                <li class="nav-item" th:if="${user == null}">
+                    <a class="nav-link" href="/auth/login">Đăng Nhập</a>
+                </li>
+                <li class="nav-item" th:if="${user == null}">
+                    <a class="nav-link" href="/auth/register">Đăng Ký</a>
+                </li>
+                <li class="nav-item" th:if="${user != null}">
+                    <span class="navbar-text">Xin chào, <span th:text="${user.username}"></span>!</span>
+                </li>
+                <li class="nav-item" th:if="${user != null}">
+                    <a class="nav-link" href="/auth/logout">Đăng Xuất</a>
+                </li>
             </ul>
         </div>
     </div>

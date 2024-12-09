@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AuthController {
 
@@ -45,14 +47,29 @@ public class AuthController {
     }
 
     @PostMapping("/auth/login")
-    public String loginUser(@RequestParam String username, @RequestParam String password, Model model) {
+    public String loginUser(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
         User existingUser = userRepository.findByUsername(username);
         if (existingUser != null && passwordEncoder.matches(password, existingUser.getPassword())) {
             // Đăng nhập thành công
+            session.setAttribute("user", existingUser); // Lưu thông tin người dùng vào phiên
             return "redirect:/products/index"; // Chuyển hướng đến trang sản phẩm
         }
 
         model.addAttribute("error", "Thông tin đăng nhập không hợp lệ");
         return "auth/login"; // Quay lại trang đăng nhập nếu thông tin không hợp lệ
+    }
+
+    @GetMapping("/auth/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Xóa session
+        return "redirect:/auth/login"; // Chuyển hướng về trang đăng nhập
+    }
+
+    @GetMapping("/auth/products") // Thay đổi đường dẫn ở đây
+    public String viewProducts(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+        // Thêm mã để lấy danh sách sản phẩm và thêm vào mô hình
+        return "products/index"; // Trả về trang sản phẩm
     }
 }
