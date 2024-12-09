@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h2 class="mt-5">Sửa Sản Phẩm</h2>
-    <form action="@{/admin/products/edit/{id}(id=${product.id})}" method="post">
+    <form th:action="@{/admin/products/edit/{id}(id=${product.id})}" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Tên Sản Phẩm</label>
             <input type="text" class="form-control" id="name" name="name" th:value="${product.name}" required>
@@ -24,12 +24,8 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Giá</label>
-            <div class="input-group">
-                <span class="input-group-text">$</span>
-                <input type="number" class="form-control" id="price" name="price" th:value="${product.price}" required step="0.01">
-            </div>
+            <input type="number" class="form-control" id="price" name="price" th:value="${product.price}" required step="0.01">
         </div>
-
         <div class="mb-3">
             <label for="description" class="form-label">Mô Tả</label>
             <textarea class="form-control" id="description" name="description" rows="3" required th:text="${product.description}"></textarea>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="mt-5">Thêm Sản Phẩm Mới</h2>
+    <h2 class="mt-5">Thêm Sản Phẩm</h2>
     <form action="/admin/products/add" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Tên Sản Phẩm</label>
@@ -24,12 +24,8 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Giá</label>
-            <div class="input-group">
-                <span class="input-group-text">$</span>
-                <input type="number" class="form-control" id="price" name="price" th:value="${product.price}" required step="0.01">
-            </div>
+            <input type="number" class="form-control" id="price" name="price" required step="0.01">
         </div>
-
         <div class="mb-3">
             <label for="description" class="form-label">Mô Tả</label>
             <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
