@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sản phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .navbar { background-color: #343a40; }
+        .navbar a { color: #ffffff; }
+        .navbar a:hover { color: #ffc107; }
+        .card { transition: transform 0.2s; }
+        .card:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); }
+        .card-title { font-size: 1.25rem; font-weight: bold; color: #343a40; }
+        .card-text { color: #6c757d; }
+        .card-img-top { height: 200px; object-fit: cover; } /* Đảm bảo hình ảnh có kích thước đồng nhất */
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Watchesse</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Trang Chủ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Sản Phẩm</a></li>
+                <li class="nav-item"><a class="nav-link" href="/products/cart"><i class="bi bi-cart-fill"></i> Giỏ Hàng</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="text-center my-4">Sản Phẩm</h1>
+    <div class="row row-cols-2 row-cols-md-4 g-4">
+        <div th:each="product : ${products}">
+            <div class="col">
+                <div class="card">
+                    <a th:href="@{/products/{id}(id=${product.id})}">
+                        <img th:src="@{'/images/' + ${product.imageFilename}}" class="card-img-top" alt="Hình ảnh sản phẩm">
+                    </a>
+                    <div class="card-body">
+                        <a th:href="@{/products/{id}(id=${product.id})}" class="card-title text-decoration-none" th:text="${product.name}"></a>
+                        <p class="card-text" th:text="${product.category}"></p>
+                        <p class="card-text fw-bold" th:text="'$' + ${product.price}"></p>
+                        <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary mt-3">Mua Ngay</a>
+                        <a href="/products/cart" class="btn btn-secondary mt-3" title="Giỏ hàng">
+                            <i class="bi bi-cart-fill"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
