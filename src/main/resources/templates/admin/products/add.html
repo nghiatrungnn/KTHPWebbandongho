@@ -5,10 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Thêm Sản Phẩm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #343a40; /* Màu nền xám đen */
+            color: white; /* Màu chữ trắng */
+        }
+        .container {
+            background-color: #ffffff; /* Màu nền trắng cho container */
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #343a40; /* Màu chữ tiêu đề */
+        }
+        .form-label {
+            font-weight: bold;
+            color: #343a40; /* Màu chữ cho nhãn */
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-secondary {
+            margin-left: 10px;
+        }
+        .input-group-text {
+            background-color: #ffffff; /* Màu nền trắng cho input group */
+            color: #343a40; /* Màu chữ cho input group */
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2 class="mt-5">Thêm Sản Phẩm</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Thêm Sản Phẩm</h2>
     <form action="/admin/products/add" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Tên Sản Phẩm</label>
@@ -24,7 +55,10 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Giá</label>
-            <input type="number" class="form-control" id="price" name="price" required step="0.01">
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="price" name="price" required step="0.01">
+            </div>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Mô Tả</label>
@@ -34,8 +68,12 @@
             <label for="imageFilename" class="form-label">Tên Tệp Hình Ảnh</label>
             <input type="text" class="form-control" id="imageFilename" name="imageFilename" required>
         </div>
-        <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
-        <a href="/admin/products" class="btn btn-secondary">Hủy</a>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Thêm Sản Phẩm
+            </button>
+            <a href="/admin/products" class="btn btn-secondary">Hủy</a>
+        </div>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
